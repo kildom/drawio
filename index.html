@@ -4,9 +4,6 @@
 
     const defaultBranch = 'master';
 
-    let ref = document.referrer.toString();
-    let hash = location.hash.toString();
-
     function parseGitHubURL(url) {
         let r = {};
         if ((m = url.match(/:\/\/github.com\/([^\/]+)\/([^\/]+)\/?($|\?|#)/))) {
@@ -39,6 +36,9 @@
 
     function doRedirect() {
 
+        let ref = document.referrer.toString();
+        let hash = location.hash.toString();
+
         let parts = parseGitHubURL(ref);
         if (!parts) {
             document.write('<body><h1>Error</h1><div>Cannot parse referrer. Go to this page from GitHub repository or open drawing directly in <a href="https://draw.io/">draw.io</a>.</div></body>');
@@ -53,9 +53,7 @@
 
         let dest = `https://www.draw.io/#H${encodeURIComponent(parts.user)}%2F${encodeURIComponent(parts.repo)}%2F${encodeURIComponent(parts.branch)}${encodeURIComponent(parts.path)}${hash}`;
 
-        document.write(dest);
-
-        setTimeout(() => location.replace(dest), 10000);
+        location.replace(dest);
     }
 
     doRedirect();
