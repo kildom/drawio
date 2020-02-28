@@ -1,5 +1,49 @@
-<html><script>
+<html>
 
-alert(document.referrer + '\r\n' + location.hash);
+<script>
 
-</script></html
+    const defaultBranch = 'master';
+
+    let ref = document.referrer.toString();
+    let hash = location.hash.toString();
+
+    function parseGitHubURL(url) {
+        let r = {};
+        if ((m = url.match(/:\/\/github.com\/([^\/]+)\/([^\/]+)\/?($|\?|#)/))) {
+            r.user = m[1];
+            r.repo = m[2];
+            r.branch = defaultBranch;
+            r.path = '/';
+        } else if ((m = url.match(/:\/\/github.com\/([^\/]+)\/([^\/]+)\/tree\/([^\/]+)(.*)($|\?|#)/))) {
+            r.user = m[1];
+            r.repo = m[2];
+            r.branch = m[3];
+            r.path = m[4];
+        } else if ((m = url.match(/:\/\/github.com\/([^\/]+)\/([^\/]+)\/blob\/([^\/]+)(.*)\/[^\/]*($|\?|#)/))) {
+            r.user = m[1];
+            r.repo = m[2];
+            r.branch = m[3];
+            r.path = m[4];
+        } else {
+            return null;
+        }
+        if (!r.path.startsWith('/')) {
+            r.path = '/' + r.path;
+        }
+        if (!r.path.endsWith('/')) {
+            r.path = r.path + '/';
+        }
+        r.url = url;
+        return r;
+    }
+
+    let parts = parseGitHubURL(ref);
+    if (hash.startsWith('#')) {
+        hash = hash.substr(1);
+    }
+
+    location.href = `https://www.draw.io/#H${encodeURI(parts.user)}%2F${encodeURI(parts.repo)}%2F${encodeURI(parts.branch)}${encodeURI(parts.path)}${encodeURI(hash)}.drawio`;
+
+</script>
+
+</html>
