@@ -31,7 +31,7 @@
             r.path = '/' + r.path;
         }
         if (!r.path.endsWith('/')) {
-            r.path = r.path + '/';
+            r.path += '/';
         }
         r.url = url;
         return r;
@@ -40,6 +40,9 @@
     let parts = parseGitHubURL(ref);
     if (hash.startsWith('#')) {
         hash = hash.substr(1);
+    }
+    if (!hash.endsWith('.drawio')) {
+        hash += '.drawio';
     }
 
     location.href = `https://www.draw.io/#H${encodeURI(parts.user)}%2F${encodeURI(parts.repo)}%2F${encodeURI(parts.branch)}${encodeURI(parts.path)}${encodeURI(hash)}.drawio`;
