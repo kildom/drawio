@@ -45,7 +45,11 @@
         hash += '.drawio';
     }
 
-    location.href = `https://www.draw.io/#H${encodeURI(parts.user)}%2F${encodeURI(parts.repo)}%2F${encodeURI(parts.branch)}${encodeURI(parts.path)}${encodeURI(hash)}.drawio`;
+    let dest = `https://www.draw.io/#H${encodeURI(parts.user)}%2F${encodeURI(parts.repo)}%2F${encodeURI(parts.branch)}${encodeURI(parts.path)}${encodeURI(hash)}`;
+
+    document.write(dest);
+
+    setTimeout(() => location.replace(dest), 10000);
 
 </script>
 
