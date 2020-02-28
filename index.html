@@ -45,7 +45,7 @@
         hash += '.drawio';
     }
 
-    let dest = `https://www.draw.io/#H${encodeURI(parts.user)}%2F${encodeURI(parts.repo)}%2F${encodeURI(parts.branch)}${encodeURI(parts.path)}${encodeURI(hash)}`;
+    let dest = `https://www.draw.io/#H${encodeURIComponent(parts.user)}%2F${encodeURIComponent(parts.repo)}%2F${encodeURIComponent(parts.branch)}${encodeURIComponent(parts.path)}${hash}`;
 
     document.write(dest);
 
