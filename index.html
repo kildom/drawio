@@ -47,9 +47,6 @@
         if (hash.startsWith('#')) {
             hash = hash.substr(1);
         }
-        if (!hash.endsWith('.drawio')) {
-            hash += '.drawio';
-        }
 
         let dest = `https://www.draw.io/#H${encodeURIComponent(parts.user)}%2F${encodeURIComponent(parts.repo)}%2F${encodeURIComponent(parts.branch)}${encodeURIComponent(parts.path)}${hash}`;
 
