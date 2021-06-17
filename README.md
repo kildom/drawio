@@ -1,3 +1,6 @@
+> ### `WARNING!!!` <br/>
+> Due to github's HTTP security policy changes this script does not work any more.
+
 # drawio
 Utility to open draw.io diagrams directly from GitHub's Markdown
 
